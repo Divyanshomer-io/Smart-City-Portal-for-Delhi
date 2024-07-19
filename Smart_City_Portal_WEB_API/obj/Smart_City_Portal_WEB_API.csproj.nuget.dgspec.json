@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\raghu\\Downloads\\Smart City Portal Back-End\\Smart_City_Portal_WEB_API\\Smart_City_Portal_WEB_API\\Smart_City_Portal_WEB_API.csproj": {}
+    "C:\\Users\\raghu\\Downloads\\githack\\Smart-City-Portal-for-Delhi\\Smart_City_Portal_WEB_API\\Smart_City_Portal_WEB_API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\raghu\\Downloads\\Smart City Portal Back-End\\Smart_City_Portal_WEB_API\\Smart_City_Portal_WEB_API\\Smart_City_Portal_WEB_API.csproj": {
+    "C:\\Users\\raghu\\Downloads\\githack\\Smart-City-Portal-for-Delhi\\Smart_City_Portal_WEB_API\\Smart_City_Portal_WEB_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\raghu\\Downloads\\Smart City Portal Back-End\\Smart_City_Portal_WEB_API\\Smart_City_Portal_WEB_API\\Smart_City_Portal_WEB_API.csproj",
+        "projectUniqueName": "C:\\Users\\raghu\\Downloads\\githack\\Smart-City-Portal-for-Delhi\\Smart_City_Portal_WEB_API\\Smart_City_Portal_WEB_API.csproj",
         "projectName": "Smart_City_Portal_WEB_API",
-        "projectPath": "C:\\Users\\raghu\\Downloads\\Smart City Portal Back-End\\Smart_City_Portal_WEB_API\\Smart_City_Portal_WEB_API\\Smart_City_Portal_WEB_API.csproj",
+        "projectPath": "C:\\Users\\raghu\\Downloads\\githack\\Smart-City-Portal-for-Delhi\\Smart_City_Portal_WEB_API\\Smart_City_Portal_WEB_API.csproj",
         "packagesPath": "C:\\Users\\raghu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\raghu\\Downloads\\Smart City Portal Back-End\\Smart_City_Portal_WEB_API\\Smart_City_Portal_WEB_API\\obj\\",
+        "outputPath": "C:\\Users\\raghu\\Downloads\\githack\\Smart-City-Portal-for-Delhi\\Smart_City_Portal_WEB_API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\raghu\\AppData\\Roaming\\NuGet\\NuGet.Config",
