@@ -81,6 +81,7 @@ CREATE TABLE [dbo].[LocalNews](
     [Content] TEXT NOT NULL,
     [AuthorId] INT NULL,
     [PublishedAt] DATETIME NOT NULL DEFAULT GETDATE(),
+    [Image] NVARCHAR(200) NULL,
     FOREIGN KEY ([AuthorId]) REFERENCES [dbo].[Users]([Id])
 )
 GO
