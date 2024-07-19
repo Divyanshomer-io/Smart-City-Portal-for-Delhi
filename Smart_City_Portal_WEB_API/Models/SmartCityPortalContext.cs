@@ -52,7 +52,7 @@ public partial class SmartCityPortalContext : DbContext
 
             entity.Property(e => e.Title).HasMaxLength(255);
 
-            entity.Property(e => e.Image).HasMaxLength(255);
+            entity.Property(e => e.Image).HasMaxLength(200);
 
             entity.HasOne(d => d.Author)
                 .WithMany(p => p.LocalNews)
@@ -65,6 +65,11 @@ public partial class SmartCityPortalContext : DbContext
             entity.Property(e => e.EndTime).HasColumnType("datetime");
 
             entity.Property(e => e.StartTime).HasColumnType("datetime");
+
+            entity.Property(e => e.Pickup).HasMaxLength(255);
+
+            entity.Property(e => e.Destination).HasMaxLength(255);
+
         });
 
         modelBuilder.Entity<PublicTransportSchedule>(entity =>
@@ -72,6 +77,11 @@ public partial class SmartCityPortalContext : DbContext
             entity.Property(e => e.EndTime).HasColumnType("datetime");
 
             entity.Property(e => e.StartTime).HasColumnType("datetime");
+
+            entity.Property(e => e.Pickup).HasMaxLength(255);
+
+            entity.Property(e => e.Destination).HasMaxLength(255);
+
         });
 
         modelBuilder.Entity<User>(entity =>

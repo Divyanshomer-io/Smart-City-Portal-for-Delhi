@@ -161,7 +161,9 @@ namespace Smart_City_Portal_WEB_API.Controllers
             {
                 StartTime = scheduleDto.StartTime,
                 EndTime = scheduleDto.EndTime,
-                Frequency = scheduleDto.Frequency
+                Frequency = scheduleDto.Frequency,
+                Pickup = scheduleDto.Pickup,
+                Destination = scheduleDto.Destination
             };
 
             _context.PublicTransportSchedules.Add(schedule);
@@ -182,6 +184,8 @@ namespace Smart_City_Portal_WEB_API.Controllers
             schedule.StartTime = scheduleDto.StartTime;
             schedule.EndTime = scheduleDto.EndTime;
             schedule.Frequency = scheduleDto.Frequency;
+            schedule.Pickup = scheduleDto.Pickup;
+            schedule.Destination = scheduleDto.Destination;
 
             await _context.SaveChangesAsync();
 
@@ -230,7 +234,9 @@ namespace Smart_City_Portal_WEB_API.Controllers
             {
                 StartTime = scheduleDto.StartTime,
                 EndTime = scheduleDto.EndTime,
-                Frequency = scheduleDto.Frequency
+                Frequency = scheduleDto.Frequency,
+                Pickup = scheduleDto.Pickup,
+                Destination = scheduleDto.Destination
             };
 
             _context.MetroSchedules.Add(schedule);
@@ -251,6 +257,8 @@ namespace Smart_City_Portal_WEB_API.Controllers
             schedule.StartTime = scheduleDto.StartTime;
             schedule.EndTime = scheduleDto.EndTime;
             schedule.Frequency = scheduleDto.Frequency;
+            schedule.Pickup = scheduleDto.Pickup;
+            schedule.Destination = scheduleDto.Destination;
 
             await _context.SaveChangesAsync();
 
