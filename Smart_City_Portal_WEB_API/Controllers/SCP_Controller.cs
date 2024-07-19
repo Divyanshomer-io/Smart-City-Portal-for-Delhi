@@ -26,7 +26,7 @@ namespace Smart_City_Portal_WEB_API.Controllers
             public string Message { get; set; }
         }
 
-        // Users
+  
 
         [HttpGet("users")]
         public async Task<ActionResult<ApiResponse>> GetUsers()
@@ -100,7 +100,7 @@ namespace Smart_City_Portal_WEB_API.Controllers
             return Ok(new ApiResponse { Message = "User deleted successfully", Result = user });
         }
 
-        // PublicTransportSchedules
+
 
         [HttpGet("publictransportschedules")]
         public async Task<ActionResult<ApiResponse>> GetPublicTransportSchedules()
@@ -169,7 +169,7 @@ namespace Smart_City_Portal_WEB_API.Controllers
             return Ok(new ApiResponse { Message = "Public Transport Schedule deleted successfully", Result = schedule });
         }
 
-        // MetroSchedules
+
 
         [HttpGet("metroschedules")]
         public async Task<ActionResult<ApiResponse>> GetMetroSchedules()
