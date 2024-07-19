@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Smart_City_Portal_WEB_API.props" />
+</Project>
