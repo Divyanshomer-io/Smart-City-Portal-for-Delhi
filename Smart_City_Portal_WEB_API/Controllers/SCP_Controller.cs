@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Smart_City_Portal_WEB_API.Models;
 using Smart_City_Portal_WEB_API.Models.DTOs;
 
 namespace Smart_City_Portal_WEB_API.Controllers
@@ -25,7 +26,7 @@ namespace Smart_City_Portal_WEB_API.Controllers
             public string Message { get; set; }
         }
 
-        // Users
+
 
         [HttpGet("users")]
         public async Task<ActionResult<ApiResponse>> GetUsers()
@@ -46,33 +47,75 @@ namespace Smart_City_Portal_WEB_API.Controllers
         }
 
         [HttpPost("users")]
-        public async Task<ActionResult<ApiResponse>> CreateUser(UsersDTO userDTO)
+        public async Task<ActionResult<ApiResponse>> CreateUser([FromBody] UserDto userDto)
         {
+
+            var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == userDto.Email);
+            if (existingUser != null)
+            {
+                return BadRequest(new ApiResponse { Message = "Email address already exists", Result = null });
+            }
+
+            var existingUser1 = await _context.Users.FirstOrDefaultAsync(u => u.Username == userDto.Username);
+            if (existingUser1 != null)
+            {
+                return BadRequest(new ApiResponse { Message = "Username address already exists", Result = null });
+            }
+
             var user = new User
             {
-                Username = userDTO.Username,
-                Email = userDTO.Email,
+                Username = userDto.Username,
+                PasswordHash = userDto.PasswordHash,
+                Email = userDto.Email,
+                LastLoginTime = userDto.LastLoginTime,
                 CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow,
-                LastLoginTime = userDTO.LastLoginTime
+                UpdatedAt = DateTime.UtcNow
             };
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-            return Ok(new ApiResponse { Message = "User created successfully", Result = user });
+
+            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, new ApiResponse { Message = "User created successfully", Result = user });
         }
 
         [HttpPut("users/{id}")]
-        public async Task<ActionResult<ApiResponse>> UpdateUser(int id, UsersDTO userDTO)
+        public async Task<ActionResult<ApiResponse>> UpdateUser(int id, [FromBody] UserDto userDto)
         {
             var user = await _context.Users.FindAsync(id);
             if (user == null)
             {
                 return NotFound(new ApiResponse { Message = "User not found", Result = null });
             }
-            user.Username = userDTO.Username;
-            user.Email = userDTO.Email;
+
+            if (!string.IsNullOrEmpty(userDto.Email) && userDto.Email != user.Email)
+            {
+                var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == userDto.Email);
+                if (existingUser != null)
+                {
+                    return BadRequest(new ApiResponse { Message = "Email address already exists", Result = null });
+                }
+                user.Email = userDto.Email;
+            }
+
+            if (!string.IsNullOrEmpty(userDto.Username) && userDto.Username != user.Username)
+            {
+                var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Username == userDto.Username);
+                if (existingUser != null)
+                {
+                    return BadRequest(new ApiResponse { Message = "Username address already exists", Result = null });
+                }
+                user.Username = userDto.Username;
+            }
+
+
+            user.Username = userDto.Username ?? user.Username;
+            user.PasswordHash = userDto.PasswordHash ?? user.PasswordHash;
+            user.Email = userDto.Email ?? user.Email;
+            user.LastLoginTime = userDto.LastLoginTime ?? user.LastLoginTime;
             user.UpdatedAt = DateTime.UtcNow;
+
             await _context.SaveChangesAsync();
+
             return Ok(new ApiResponse { Message = "User updated successfully", Result = user });
         }
 
@@ -84,12 +127,14 @@ namespace Smart_City_Portal_WEB_API.Controllers
             {
                 return NotFound(new ApiResponse { Message = "User not found", Result = null });
             }
+
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
+
             return Ok(new ApiResponse { Message = "User deleted successfully", Result = user });
         }
 
-        // PublicTransportSchedules
+
 
         [HttpGet("publictransportschedules")]
         public async Task<ActionResult<ApiResponse>> GetPublicTransportSchedules()
@@ -110,31 +155,36 @@ namespace Smart_City_Portal_WEB_API.Controllers
         }
 
         [HttpPost("publictransportschedules")]
-        public async Task<ActionResult<ApiResponse>> CreatePublicTransportSchedule(PublicTransportScheduleDTO scheduleDTO)
+        public async Task<ActionResult<ApiResponse>> CreatePublicTransportSchedule([FromBody] PublicTransportScheduleDto scheduleDto)
         {
             var schedule = new PublicTransportSchedule
             {
-                StartTime = scheduleDTO.StartTime,
-                EndTime = scheduleDTO.EndTime,
-                Frequency = scheduleDTO.Frequency
+                StartTime = scheduleDto.StartTime,
+                EndTime = scheduleDto.EndTime,
+                Frequency = scheduleDto.Frequency
             };
+
             _context.PublicTransportSchedules.Add(schedule);
             await _context.SaveChangesAsync();
-            return Ok(new ApiResponse { Message = "Public Transport Schedule created successfully", Result = schedule });
+
+            return CreatedAtAction(nameof(GetPublicTransportSchedule), new { id = schedule.Id }, new ApiResponse { Message = "Public Transport Schedule created successfully", Result = schedule });
         }
 
         [HttpPut("publictransportschedules/{id}")]
-        public async Task<ActionResult<ApiResponse>> UpdatePublicTransportSchedule(int id, PublicTransportScheduleDTO scheduleDTO)
+        public async Task<ActionResult<ApiResponse>> UpdatePublicTransportSchedule(int id, [FromBody] PublicTransportScheduleDto scheduleDto)
         {
             var schedule = await _context.PublicTransportSchedules.FindAsync(id);
             if (schedule == null)
             {
                 return NotFound(new ApiResponse { Message = "Public Transport Schedule not found", Result = null });
             }
-            schedule.StartTime = scheduleDTO.StartTime;
-            schedule.EndTime = scheduleDTO.EndTime;
-            schedule.Frequency = scheduleDTO.Frequency;
+
+            schedule.StartTime = scheduleDto.StartTime;
+            schedule.EndTime = scheduleDto.EndTime;
+            schedule.Frequency = scheduleDto.Frequency;
+
             await _context.SaveChangesAsync();
+
             return Ok(new ApiResponse { Message = "Public Transport Schedule updated successfully", Result = schedule });
         }
 
@@ -146,12 +196,14 @@ namespace Smart_City_Portal_WEB_API.Controllers
             {
                 return NotFound(new ApiResponse { Message = "Public Transport Schedule not found", Result = null });
             }
+
             _context.PublicTransportSchedules.Remove(schedule);
             await _context.SaveChangesAsync();
+
             return Ok(new ApiResponse { Message = "Public Transport Schedule deleted successfully", Result = schedule });
         }
 
-        // MetroSchedules
+
 
         [HttpGet("metroschedules")]
         public async Task<ActionResult<ApiResponse>> GetMetroSchedules()
@@ -172,31 +224,36 @@ namespace Smart_City_Portal_WEB_API.Controllers
         }
 
         [HttpPost("metroschedules")]
-        public async Task<ActionResult<ApiResponse>> CreateMetroSchedule(MetroScheduleDTO scheduleDTO)
+        public async Task<ActionResult<ApiResponse>> CreateMetroSchedule([FromBody] MetroScheduleDto scheduleDto)
         {
             var schedule = new MetroSchedule
             {
-                StartTime = scheduleDTO.StartTime,
-                EndTime = scheduleDTO.EndTime,
-                Frequency = scheduleDTO.Frequency
+                StartTime = scheduleDto.StartTime,
+                EndTime = scheduleDto.EndTime,
+                Frequency = scheduleDto.Frequency
             };
+
             _context.MetroSchedules.Add(schedule);
             await _context.SaveChangesAsync();
-            return Ok(new ApiResponse { Message = "Metro Schedule created successfully", Result = schedule });
+
+            return CreatedAtAction(nameof(GetMetroSchedule), new { id = schedule.Id }, new ApiResponse { Message = "Metro Schedule created successfully", Result = schedule });
         }
 
         [HttpPut("metroschedules/{id}")]
-        public async Task<ActionResult<ApiResponse>> UpdateMetroSchedule(int id, MetroScheduleDTO scheduleDTO)
+        public async Task<ActionResult<ApiResponse>> UpdateMetroSchedule(int id, [FromBody] MetroScheduleDto scheduleDto)
         {
             var schedule = await _context.MetroSchedules.FindAsync(id);
             if (schedule == null)
             {
                 return NotFound(new ApiResponse { Message = "Metro Schedule not found", Result = null });
             }
-            schedule.StartTime = scheduleDTO.StartTime;
-            schedule.EndTime = scheduleDTO.EndTime;
-            schedule.Frequency = scheduleDTO.Frequency;
+
+            schedule.StartTime = scheduleDto.StartTime;
+            schedule.EndTime = scheduleDto.EndTime;
+            schedule.Frequency = scheduleDto.Frequency;
+
             await _context.SaveChangesAsync();
+
             return Ok(new ApiResponse { Message = "Metro Schedule updated successfully", Result = schedule });
         }
 
@@ -208,12 +265,136 @@ namespace Smart_City_Portal_WEB_API.Controllers
             {
                 return NotFound(new ApiResponse { Message = "Metro Schedule not found", Result = null });
             }
+
             _context.MetroSchedules.Remove(schedule);
             await _context.SaveChangesAsync();
+
             return Ok(new ApiResponse { Message = "Metro Schedule deleted successfully", Result = schedule });
+
+
         }
 
-        // WeatherUpdates
+        [HttpGet("emergencyservices")]
+        public async Task<ActionResult<ApiResponse>> GetEmergencyServices()
+        {
+            var services = await _context.EmergencyServices.ToListAsync();
+            return Ok(new ApiResponse { Message = "Emergency Services retrieved successfully", Result = services });
+        }
+
+        [HttpGet("emergencyservices/{id}")]
+        public async Task<ActionResult<ApiResponse>> GetEmergencyService(int id)
+        {
+            var service = await _context.EmergencyServices.FindAsync(id);
+            if (service == null)
+            {
+                return NotFound(new ApiResponse { Message = "Emergency Service not found", Result = null });
+            }
+            return Ok(new ApiResponse { Message = "Emergency Service retrieved successfully", Result = service });
+        }
+
+        [HttpPost("emergencyservices")]
+        public async Task<ActionResult<ApiResponse>> CreateEmergencyService(EmergencyServiceDTO serviceDTO)
+        {
+            var service = new EmergencyService
+            {
+                ServiceName = serviceDTO.ServiceName,
+                ContactNumber = serviceDTO.ContactNumber,
+                IsActive = serviceDTO.IsActive
+            };
+            _context.EmergencyServices.Add(service);
+            await _context.SaveChangesAsync();
+            return Ok(new ApiResponse { Message = "Emergency Service created successfully", Result = service });
+        }
+
+        [HttpPut("emergencyservices/{id}")]
+        public async Task<ActionResult<ApiResponse>> UpdateEmergencyService(int id, EmergencyServiceDTO serviceDTO)
+        {
+            var service = await _context.EmergencyServices.FindAsync(id);
+            if (service == null)
+            {
+                return NotFound(new ApiResponse { Message = "Emergency Service not found", Result = null });
+            }
+            service.ServiceName = serviceDTO.ServiceName;
+            service.ContactNumber = serviceDTO.ContactNumber;
+            service.IsActive = serviceDTO.IsActive;
+            await _context.SaveChangesAsync();
+            return Ok(new ApiResponse { Message = "Emergency Service updated successfully", Result = service });
+        }
+
+        [HttpDelete("emergencyservices/{id}")]
+        public async Task<ActionResult<ApiResponse>> DeleteEmergencyService(int id)
+        {
+            var service = await _context.EmergencyServices.FindAsync(id);
+            if (service == null)
+            {
+                return NotFound(new ApiResponse { Message = "Emergency Service not found", Result = null });
+            }
+            _context.EmergencyServices.Remove(service);
+            await _context.SaveChangesAsync();
+            return Ok(new ApiResponse { Message = "Emergency Service deleted successfully", Result = service });
+        }
+
+        
+
+        [HttpGet("localnews")]
+        public async Task<ActionResult<ApiResponse>> GetLocalNews()
+        {
+            var news = await _context.LocalNews.ToListAsync();
+            return Ok(new ApiResponse { Message = "Local News retrieved successfully", Result = news });
+        }
+
+        [HttpGet("localnews/{id}")]
+        public async Task<ActionResult<ApiResponse>> GetLocalNews(int id)
+        {
+            var news = await _context.LocalNews.FindAsync(id);
+            if (news == null)
+            {
+                return NotFound(new ApiResponse { Message = "Local News not found", Result = null });
+            }
+            return Ok(new ApiResponse { Message = "Local News retrieved successfully", Result = news });
+        }
+
+        [HttpPost("localnews")]
+        public async Task<ActionResult<ApiResponse>> CreateLocalNews(LocalNewsDTO newsDTO)
+        {
+            var news = new LocalNews
+            {
+                Title = newsDTO.Title,
+                Content = newsDTO.Content,
+                PublishedAt = newsDTO.PublishedAt
+            };
+            _context.LocalNews.Add(news);
+            await _context.SaveChangesAsync();
+            return Ok(new ApiResponse { Message = "Local News created successfully", Result = news });
+        }
+
+        [HttpPut("localnews/{id}")]
+        public async Task<ActionResult<ApiResponse>> UpdateLocalNews(int id, LocalNewsDTO newsDTO)
+        {
+            var news = await _context.LocalNews.FindAsync(id);
+            if (news == null)
+            {
+                return NotFound(new ApiResponse { Message = "Local News not found", Result = null });
+            }
+            news.Title = newsDTO.Title;
+            news.Content = newsDTO.Content;
+            news.PublishedAt = newsDTO.PublishedAt;
+            await _context.SaveChangesAsync();
+            return Ok(new ApiResponse { Message = "Local News updated successfully", Result = news });
+        }
+
+        [HttpDelete("localnews/{id}")]
+        public async Task<ActionResult<ApiResponse>> DeleteLocalNews(int id)
+        {
+            var news = await _context.LocalNews.FindAsync(id);
+            if (news == null)
+            {
+                return NotFound(new ApiResponse { Message = "Local News not found", Result = null });
+            }
+            _context.LocalNews.Remove(news);
+            await _context.SaveChangesAsync();
+            return Ok(new ApiResponse { Message = "Local News deleted successfully", Result = news });
+        }
 
         [HttpGet("weatherupdates")]
         public async Task<ActionResult<ApiResponse>> GetWeatherUpdates()
@@ -277,128 +458,23 @@ namespace Smart_City_Portal_WEB_API.Controllers
             return Ok(new ApiResponse { Message = "Weather Update deleted successfully", Result = update });
         }
 
-        // EmergencyServices
-
-        [HttpGet("emergencyservices")]
-        public async Task<ActionResult<ApiResponse>> GetEmergencyServices()
+        [HttpGet("users/search")]
+        public async Task<ActionResult<ApiResponse>> SearchUser([FromQuery] string? email, [FromQuery] string? username)
         {
-            var services = await _context.EmergencyServices.ToListAsync();
-            return Ok(new ApiResponse { Message = "Emergency Services retrieved successfully", Result = services });
-        }
-
-        [HttpGet("emergencyservices/{id}")]
-        public async Task<ActionResult<ApiResponse>> GetEmergencyService(int id)
-        {
-            var service = await _context.EmergencyServices.FindAsync(id);
-            if (service == null)
+            if (string.IsNullOrEmpty(email) && string.IsNullOrEmpty(username))
             {
-                return NotFound(new ApiResponse { Message = "Emergency Service not found", Result = null });
+                return BadRequest(new ApiResponse { Message = "Email or username must be provided", Result = null });
             }
-            return Ok(new ApiResponse { Message = "Emergency Service retrieved successfully", Result = service });
-        }
 
-        [HttpPost("emergencyservices")]
-        public async Task<ActionResult<ApiResponse>> CreateEmergencyService(EmergencyServiceDTO serviceDTO)
-        {
-            var service = new EmergencyService
-            {
-                ServiceName = serviceDTO.ServiceName,
-                ContactNumber = serviceDTO.ContactNumber,
-                IsActive = serviceDTO.IsActive
-            };
-            _context.EmergencyServices.Add(service);
-            await _context.SaveChangesAsync();
-            return Ok(new ApiResponse { Message = "Emergency Service created successfully", Result = service });
-        }
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Email == email || u.Username == username);
 
-        [HttpPut("emergencyservices/{id}")]
-        public async Task<ActionResult<ApiResponse>> UpdateEmergencyService(int id, EmergencyServiceDTO serviceDTO)
-        {
-            var service = await _context.EmergencyServices.FindAsync(id);
-            if (service == null)
+            if (user == null)
             {
-                return NotFound(new ApiResponse { Message = "Emergency Service not found", Result = null });
+                return NotFound(new ApiResponse { Message = "User not found", Result = null });
             }
-            service.ServiceName = serviceDTO.ServiceName;
-            service.ContactNumber = serviceDTO.ContactNumber;
-            service.IsActive = serviceDTO.IsActive;
-            await _context.SaveChangesAsync();
-            return Ok(new ApiResponse { Message = "Emergency Service updated successfully", Result = service });
-        }
 
-        [HttpDelete("emergencyservices/{id}")]
-        public async Task<ActionResult<ApiResponse>> DeleteEmergencyService(int id)
-        {
-            var service = await _context.EmergencyServices.FindAsync(id);
-            if (service == null)
-            {
-                return NotFound(new ApiResponse { Message = "Emergency Service not found", Result = null });
-            }
-            _context.EmergencyServices.Remove(service);
-            await _context.SaveChangesAsync();
-            return Ok(new ApiResponse { Message = "Emergency Service deleted successfully", Result = service });
-        }
-
-        // LocalNews
-
-        [HttpGet("localnews")]
-        public async Task<ActionResult<ApiResponse>> GetLocalNews()
-        {
-            var news = await _context.LocalNews.ToListAsync();
-            return Ok(new ApiResponse { Message = "Local News retrieved successfully", Result = news });
-        }
-
-        [HttpGet("localnews/{id}")]
-        public async Task<ActionResult<ApiResponse>> GetLocalNews(int id)
-        {
-            var news = await _context.LocalNews.FindAsync(id);
-            if (news == null)
-            {
-                return NotFound(new ApiResponse { Message = "Local News not found", Result = null });
-            }
-            return Ok(new ApiResponse { Message = "Local News retrieved successfully", Result = news });
-        }
-
-        [HttpPost("localnews")]
-        public async Task<ActionResult<ApiResponse>> CreateLocalNews(LocalNewsDTO newsDTO)
-        {
-            var news = new LocalNews
-            {
-                Title = newsDTO.Title,
-                Content = newsDTO.Content,
-                PublishedAt = newsDTO.PublishedAt
-            };
-            _context.LocalNews.Add(news);
-            await _context.SaveChangesAsync();
-            return Ok(new ApiResponse { Message = "Local News created successfully", Result = news });
-        }
-
-        [HttpPut("localnews/{id}")]
-        public async Task<ActionResult<ApiResponse>> UpdateLocalNews(int id, LocalNewsDTO newsDTO)
-        {
-            var news = await _context.LocalNews.FindAsync(id);
-            if (news == null)
-            {
-                return NotFound(new ApiResponse { Message = "Local News not found", Result = null });
-            }
-            news.Title = newsDTO.Title;
-            news.Content = newsDTO.Content;
-            news.PublishedAt = newsDTO.PublishedAt;
-            await _context.SaveChangesAsync();
-            return Ok(new ApiResponse { Message = "Local News updated successfully", Result = news });
-        }
-
-        [HttpDelete("localnews/{id}")]
-        public async Task<ActionResult<ApiResponse>> DeleteLocalNews(int id)
-        {
-            var news = await _context.LocalNews.FindAsync(id);
-            if (news == null)
-            {
-                return NotFound(new ApiResponse { Message = "Local News not found", Result = null });
-            }
-            _context.LocalNews.Remove(news);
-            await _context.SaveChangesAsync();
-            return Ok(new ApiResponse { Message = "Local News deleted successfully", Result = news });
+            return Ok(new ApiResponse { Message = "User found", Result = user });
         }
     }
 }

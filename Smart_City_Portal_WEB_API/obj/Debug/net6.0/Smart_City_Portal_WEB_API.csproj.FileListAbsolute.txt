@@ -66,3 +66,4 @@ C:\Users\raghu\Downloads\Smart City Portal Back-End\Smart_City_Portal_WEB_API\Sm
 C:\Users\raghu\Downloads\Smart City Portal Back-End\Smart_City_Portal_WEB_API\Smart_City_Portal_WEB_API\obj\Debug\net6.0\Smart_City_Portal_WEB_API.pdb
 C:\Users\raghu\Downloads\Smart City Portal Back-End\Smart_City_Portal_WEB_API\Smart_City_Portal_WEB_API\obj\Debug\net6.0\Smart_City_Portal_WEB_API.genruntimeconfig.cache
 C:\Users\raghu\Downloads\Smart City Portal Back-End\Smart_City_Portal_WEB_API\Smart_City_Portal_WEB_API\obj\Debug\net6.0\ref\Smart_City_Portal_WEB_API.dll
+C:\Users\raghu\Downloads\Smart City Portal Back-End\Smart_City_Portal_WEB_API\Smart_City_Portal_WEB_API\obj\Debug\net6.0\Smart_City_Portal_WEB_API.sourcelink.json

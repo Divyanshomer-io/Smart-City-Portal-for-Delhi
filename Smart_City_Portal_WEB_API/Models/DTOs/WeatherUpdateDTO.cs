@@ -7,6 +7,6 @@
         public double Humidity { get; set; }
         public string WeatherDescription { get; set; } = null!;
         public DateTime Timestamp { get; set; }
-    
-}
+
+    }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 namespace Smart_City_Portal_WEB_API.Models
+
 {
     public partial class LocalNews
     {

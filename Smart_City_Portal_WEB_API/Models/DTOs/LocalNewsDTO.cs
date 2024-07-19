@@ -7,6 +7,5 @@
         public string Content { get; set; } = null!;
         public int? AuthorId { get; set; }
         public DateTime PublishedAt { get; set; }
-        public UsersDTO? Author { get; set; }
     }
 }
