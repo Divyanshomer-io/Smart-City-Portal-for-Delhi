@@ -7,5 +7,7 @@
         public string Content { get; set; } = null!;
         public int? AuthorId { get; set; }
         public DateTime PublishedAt { get; set; }
+
+        public string? Image { get; set; }
     }
 }

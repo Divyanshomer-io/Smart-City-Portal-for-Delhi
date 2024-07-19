@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Smart_City_Portal_WEB_API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e41c8d920aaaab0ed33a289edbd86654237183e6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0eb6becffb4090e4daa53870d1ef2c38c3888b34")]
 [assembly: System.Reflection.AssemblyProductAttribute("Smart_City_Portal_WEB_API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Smart_City_Portal_WEB_API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

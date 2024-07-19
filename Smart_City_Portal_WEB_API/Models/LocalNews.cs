@@ -12,6 +12,8 @@ namespace Smart_City_Portal_WEB_API.Models
         public int? AuthorId { get; set; }
         public DateTime PublishedAt { get; set; }
 
+        public string? Image { get; set; }
+
         public virtual User? Author { get; set; }
     }
 }

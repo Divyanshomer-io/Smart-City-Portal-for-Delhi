@@ -334,7 +334,7 @@ namespace Smart_City_Portal_WEB_API.Controllers
             return Ok(new ApiResponse { Message = "Emergency Service deleted successfully", Result = service });
         }
 
-        
+
 
         [HttpGet("localnews")]
         public async Task<ActionResult<ApiResponse>> GetLocalNews()
@@ -361,7 +361,8 @@ namespace Smart_City_Portal_WEB_API.Controllers
             {
                 Title = newsDTO.Title,
                 Content = newsDTO.Content,
-                PublishedAt = newsDTO.PublishedAt
+                PublishedAt = newsDTO.PublishedAt,
+                Image = newsDTO.Image
             };
             _context.LocalNews.Add(news);
             await _context.SaveChangesAsync();
@@ -379,6 +380,7 @@ namespace Smart_City_Portal_WEB_API.Controllers
             news.Title = newsDTO.Title;
             news.Content = newsDTO.Content;
             news.PublishedAt = newsDTO.PublishedAt;
+            news.Image = newsDTO.Image;
             await _context.SaveChangesAsync();
             return Ok(new ApiResponse { Message = "Local News updated successfully", Result = news });
         }

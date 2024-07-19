@@ -52,6 +52,8 @@ public partial class SmartCityPortalContext : DbContext
 
             entity.Property(e => e.Title).HasMaxLength(255);
 
+            entity.Property(e => e.Image).HasMaxLength(255);
+
             entity.HasOne(d => d.Author)
                 .WithMany(p => p.LocalNews)
                 .HasForeignKey(d => d.AuthorId)
