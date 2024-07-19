@@ -1,4 +1,4 @@
-﻿namespace Smart_City_Portal_WEB_API.Models.NewFolder5
+﻿namespace Smart_City_Portal_WEB_API.Models.DTOs
 {
     public class WeatherUpdateDTO
     {
