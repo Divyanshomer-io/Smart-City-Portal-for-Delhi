@@ -42,7 +42,9 @@ CREATE TABLE [dbo].[PublicTransportSchedules](
     [Id] INT IDENTITY(1,1) PRIMARY KEY,
     [StartTime] DATETIME NOT NULL,
     [EndTime] DATETIME NOT NULL,
-    [Frequency] INT NOT NULL
+    [Frequency] INT NOT NULL,
+    [Pickup] NVARCHAR(255) NULL,
+    [Destination] NVARCHAR(255) NULL
 )
 GO
 
@@ -51,7 +53,9 @@ CREATE TABLE [dbo].[MetroSchedules](
     [Id] INT IDENTITY(1,1) PRIMARY KEY,
     [StartTime] DATETIME NOT NULL,
     [EndTime] DATETIME NOT NULL,
-    [Frequency] INT NOT NULL
+    [Frequency] INT NOT NULL,
+    [Pickup] NVARCHAR(255) NULL,
+    [Destination] NVARCHAR(255) NULL
 )
 GO
 
