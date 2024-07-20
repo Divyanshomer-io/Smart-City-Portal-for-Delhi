@@ -1,0 +1,115 @@
+<header class="header">
+    <div class="header-1">
+        <a href="#" class="logo"><i class="fas fa-newspaper"></i> Smart City</a>
+        <form action="#" class="search-form">
+            <input type="search" name="search" id="search-box" placeholder="Search" class="box">
+            <label for="search-box" class="fas fa-search"></label>
+        </form>
+        <div class="icons">
+            <div id="search-btn" class="fas fa-search"></div>
+            <div id="login-btn" class="fas fa-user"></div>
+        </div>
+    </div>
+
+    <div class="header-2">
+        <nav class="navbar">
+            <a href="#busSchedules">BUS SCHEDULES</a>
+            <a href="#metroSchedules">METRO SCHEDULES</a>
+            <a href="#weather">WEATHER</a>
+            <a href="#emergencyServices">EMERGENCY SERVICES</a>
+            <a href="#news">NEWS</a>
+        </nav>
+    </div>
+</header>
+
+<section class="busSchedules" id="busSchedules">
+    <div class="row">
+        <div class="content">
+            <h3 class="title">BUS SCHEDULES</h3>
+            <img src="assets/images/buspt.jpg" alt="busSchedules" width="300">
+            <table id="tab">
+                <tr>
+                  <th>Time</th>
+                  <th>Pick up</th>
+                  <th>Destination</th>
+                </tr>
+                <tr>
+                  <td>1 p.m.</td>
+                  <td>Kendriya Terminal</td>
+                  <td>Rohini Sector 16</td>
+                </tr>
+                <tr>
+                  <td>2 p.m.</td>
+                  <td>New Delhi Railway Station Gate 2</td>
+                  <td>Anand Vihar ISBT (Viveka Nand ISBT)</td>
+                </tr>
+                <tr>
+                  <td>5 p.m.</td>
+                  <td>ISBT / Kashmiri Gate</td>
+                  <td>Anand Vihar ISBT (Viveka Nand ISBT)</td>
+                </tr>
+                <tr>
+                  <td>1 a.m.</td>
+                  <td>ISBT Maharana Pratap Bus (T)</td>
+                  <td>Anand Vihar ISBT (Viveka Nand ISBT)</td>
+                </tr>
+                <tr>
+                  <td>11 a.m.</td>
+                  <td>Karampura Terminal</td>
+                  <td>Noida Sector 34 U.P. Roadways Terminal</td>
+                </tr>
+                <tr>
+                  <td>12 p.m.</td>
+                  <td>Shivaji Stadium</td>
+                  <td>Mundka</td>
+                </tr>
+                <tr>
+                  <td>8 p.m.</td>
+                  <td>New Delhi Railway Station Gate 2</td>
+                  <td>Dwarka Sector 14 Metro Station</td>
+                </tr>
+                <tr>
+                  <td>11 p.m.</td>
+                  <td>Kendriya Terminal</td>
+                  <td>Kewal Park MCD Flats</td>
+                </tr>
+                <tr>
+                  <td>4 a.m.</td>
+                  <td>Badarpur Border</td>
+                  <td>Noida Phase 2</td>
+                </tr>
+                <tr>
+                  <td>1 p.m.</td>
+                  <td>Old Delhi Railway Station</td>
+                  <td>Ramjanpur Village</td>
+                </tr>
+              </table>
+        </div>
+    </div>
+</section>
+
+<app-metro-schedules></app-metro-schedules>
+
+<app-weather></app-weather>
+
+<app-emergency-services id="emergencyServices"></app-emergency-services>
+
+<app-local-news id="news"></app-local-news>
+
+<div class="login-form-container">
+    <div id="close-login-btn" class="fas fa-times"></div>
+    <form action="">
+        <h3>Sign In</h3>
+        <span>Username</span>
+        <input type="email" name="username" id="username" class="box" placeholder="Enter your email">
+        <span>Password</span>
+        <input type="password" name="password" id="password" class="box" placeholder="Enter your password">
+        <div class="checkbox">
+            <input type="checkbox" name="remember" id="remember-me">
+            <label for="remember-me">Remember me</label>
+        </div>
+        <input type="submit" value="Sign In" class="btn">
+        <p>Forgot password? <a href="#">Click here</a></p>
+        <p>Don't have an account? <a href="#">Sign up</a></p>
+    </form>
+</div>

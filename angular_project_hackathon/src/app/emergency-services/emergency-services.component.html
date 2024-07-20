@@ -1,0 +1,54 @@
+<section class="emergency-service">
+    <h1 class="heading">EMERGENCY SERVICES</h1>
+    <div class="form-section">
+        <!-- Form for submitting new data -->
+         
+        <form [formGroup]="emergencyServiceForm" (ngSubmit)="getValue(emergencyServiceForm.value)">
+            <input type="text" id="serviceName" placeholder="Enter Service Name" formControlName="serviceName">
+            <br>
+            <span class="error-message" *ngIf="serviceName && serviceName.invalid && serviceName.touched">This field is invalid</span>
+            <br><br>
+            <input type="text" id="contactNumber" placeholder="Enter Contact Number" formControlName="contactNumber">
+            <br>
+            <span class="error-message" *ngIf="contactNumber && contactNumber.invalid && contactNumber.touched">This field is invalid</span>
+            <br><br>
+            <input type="checkbox" id="isActive" formControlName="isActive">
+            <label for="isActive">Active</label>
+            <br><br>
+            <button type="submit" [disabled]="emergencyServiceForm.invalid">Submit</button>
+            <p class="success-message">{{ successMessage }}</p>
+        </form>
+  
+        <!-- Container for delete and retrieve forms -->
+        <div class="delete-retrieve-container">
+            <!-- Form for deleting a service -->
+            <form (ngSubmit)="deleteService(deleteId.value)">
+                <input type="text" #deleteId placeholder="Enter Service ID to Delete">
+                <br><br>
+                <button type="submit">Delete</button>
+            </form>
+      
+            <!-- Form for Retrieving a Service -->
+            <form [formGroup]="getForm" (ngSubmit)="retrieveService()">
+                <input type="text" id="retrieveId" formControlName="id" placeholder="Enter Service ID to Retrieve">
+                <br><br>
+                <button type="submit">Retrieve</button>
+            </form>
+        </div>
+    </div>
+  
+    <!-- Display retrieved service data -->
+    <div *ngIf="serviceDataList.length > 0" class="service-data">
+        <h3>Service Details:</h3>
+        <div class="service-boxes">
+            <div *ngFor="let service of serviceDataList" class="service-box">
+                <div *ngIf="service.result.serviceName">
+                    <p><strong>Service Name:</strong> {{ service.result.serviceName }}</p>
+                </div>
+                <div *ngIf="service.result.contactNumber">
+                    <p><strong>Contact Number:</strong> {{ service.result.contactNumber }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

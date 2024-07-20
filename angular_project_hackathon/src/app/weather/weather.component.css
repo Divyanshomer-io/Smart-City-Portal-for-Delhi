@@ -1,0 +1,82 @@
+.weather {
+    padding: 20px 0;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .weather-panel {
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 1200px; /* Increased max-width to make the panel wider */
+    width: 95%; /* Adjusted width to 95% of the container */
+    color: #fff;
+    margin: 0 auto; /* Center the panel horizontally */
+  }
+  
+  .title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #006400;
+    font-weight: bold;
+    font-size: 2em;
+  }
+  
+  .h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .h3.weather-description {
+    font-size: 1.2em;
+    margin-top: 0;
+  }
+  
+  .h1.temperature {
+    font-size: 3em;
+    font-weight: bold;
+  }
+  
+  .forecast {
+    margin-top: 20px;
+    padding-left: 0;
+  }
+  
+  .forecast li {
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .forecast li h3 {
+    font-size: 1.2em;
+  }
+  
+  .forecast li p {
+    margin-top: 5px;
+    font-size: 0.9em;
+  }
+  
+  .mi {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  
+  /* Media queries for responsiveness */
+  @media (max-width: 767px) {
+    .weather-panel {
+      padding: 10px;
+    }
+  
+    .h1.temperature {
+      font-size: 2.5em;
+    }
+  
+    .forecast li h3 {
+      font-size: 1em;
+    }
+  }
+  
