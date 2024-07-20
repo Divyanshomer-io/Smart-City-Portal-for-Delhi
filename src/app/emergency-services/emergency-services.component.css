@@ -1,0 +1,116 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+	  color:rgb(3, 66, 3);
+}
+
+.emergency-service.heading {
+    text-align: center;
+    background-color: #e1f5ed;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    color: rgb(3, 66, 3);
+    
+}
+.emergency-service {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+}
+
+.form-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    max-width: 1200px;
+    gap: 20px;
+}
+
+form {
+    background-color: #d3e3d6; /* Lightly shaded background */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+form input[type="text"],
+form input[type="checkbox"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid rgb(3, 66, 3);
+    border-radius: 5px;
+    width: 100%;
+    font-size: 1em;
+}
+
+form button[type="submit"] {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(3, 66, 3);
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button[type="submit"]:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+form button[type="submit"]:hover:not(:disabled) {
+    background-color: green;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+	  font-weight: bolder;
+}
+
+.success-message {
+    color: green;
+    font-size: 0.9em;
+}
+.delete-retrieve-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.service-data {
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 20px;
+}
+
+.service-data h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.service-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.service-box {
+    background-color: #d3e3d6;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: calc(25% - 20px); /* 4 items per row */
+}
+
+.service-box p {
+    margin: 5px 0;
+}

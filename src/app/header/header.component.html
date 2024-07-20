@@ -1,0 +1,163 @@
+<header class="header">
+  <div class="header-1">
+      <a href="#" class="logo"><i class="fas fa-newspaper"></i> Smart City Delhi</a>
+      <div class="icons">
+          <div id="login-btn" class="fas fa-user"></div>
+      </div>
+  </div>
+
+  <div class="header-2">
+      <nav class="navbar">
+          <a href="#busSchedules">BUS SCHEDULES</a>
+          <a href="#metroSchedules">METRO SCHEDULES</a>
+          <a href="#weather">WEATHER</a>
+          <a href="#emergencyServices">EMERGENCY SERVICES</a>
+          <a href="#news">NEWS</a>
+      </nav>
+  </div>
+</header>
+
+<section class="busSchedules" id="busSchedules">
+  <div class="row">
+      <div class="content">
+          <h3 class="title">BUS SCHEDULES</h3>
+          <img src="assets/images/buspt.jpg" alt="busSchedules" width="300">
+          <table id="tab">
+              <tr>
+                <th>Time</th>
+                <th>Pick up</th>
+                <th>Destination</th>
+              </tr>
+              <tr>
+                <td>1 p.m.</td>
+                <td>Kendriya Terminal</td>
+                <td>Rohini Sector 16</td>
+              </tr>
+              <tr>
+                <td>2 p.m.</td>
+                <td>New Delhi Railway Station Gate 2</td>
+                <td>Anand Vihar ISBT (Viveka Nand ISBT)</td>
+              </tr>
+              <tr>
+                <td>5 p.m.</td>
+                <td>ISBT / Kashmiri Gate</td>
+                <td>Anand Vihar ISBT (Viveka Nand ISBT)</td>
+              </tr>
+              <tr>
+                <td>1 a.m.</td>
+                <td>ISBT Maharana Pratap Bus (T)</td>
+                <td>Anand Vihar ISBT (Viveka Nand ISBT)</td>
+              </tr>
+              <tr>
+                <td>11 a.m.</td>
+                <td>Karampura Terminal</td>
+                <td>Noida Sector 34 U.P. Roadways Terminal</td>
+              </tr>
+              <tr>
+                <td>12 p.m.</td>
+                <td>Shivaji Stadium</td>
+                <td>Mundka</td>
+              </tr>
+              <tr>
+                <td>8 p.m.</td>
+                <td>New Delhi Railway Station Gate 2</td>
+                <td>Dwarka Sector 14 Metro Station</td>
+              </tr>
+              <tr>
+                <td>11 p.m.</td>
+                <td>Kendriya Terminal</td>
+                <td>Kewal Park MCD Flats</td>
+              </tr>
+              <tr>
+                <td>4 a.m.</td>
+                <td>Badarpur Border</td>
+                <td>Noida Phase 2</td>
+              </tr>
+              <tr>
+                <td>1 p.m.</td>
+                <td>Old Delhi Railway Station</td>
+                <td>Ramjanpur Village</td>
+              </tr>
+            </table>
+      </div>
+  </div>
+</section>
+
+<app-metro-schedules></app-metro-schedules>
+
+<section class="weather" id="weather">
+  <div class="row">
+      <div class="content">
+          <h3 class="title">WEATHER</h3>
+          <div class="main container">
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4 weather-panel">
+                    <div class="col-xs-6">
+                      <h2>Delhi<br><small>July 20, 2024</small></h2>
+                      <p class="h3"><i class="mi mi-fw mi-lg mi-rain-heavy"></i> Rainy</p>
+                    </div>
+                    <div class="col-xs-6 text-center">
+                      <div class="h1 temperature">
+                        <span>12°</span>
+                        <br>
+                        <small>8° / 13°</small>
+                      </div>
+                    </div>
+                    <div class="col-xs-12">
+                      <ul class="list-inline row forecast">
+                        <li class="col-xs-4 col-sm-2 text-center">
+                          <h3 class="h5">Wed</h3>
+                          <p><i class="mi mi-fw mi-2x mi-cloud-sun"></i><br>9°/18°</p>
+                        </li>
+                        <li class="col-xs-4 col-sm-2 text-center">
+                          <h3 class="h5">Thu</h3>
+                          <p><i class="mi mi-fw mi-2x mi-sun"></i><br>12°/23°</p>
+                        </li>
+                        <li class="col-xs-4 col-sm-2 text-center">
+                          <h3 class="h5">Fri</h3>
+                          <p><i class="mi mi-fw mi-2x mi-cloud-sun"></i><br>14°/24°</p>
+                        </li>
+                        <li class="col-xs-4 col-sm-2 text-center">
+                          <h3 class="h5">Sat</h3>
+                          <p><i class="mi mi-fw mi-2x mi-rain"></i><br>15°/23°</p>
+                        </li>
+                        <li class="col-xs-4 col-sm-2 text-center">
+                          <h3 class="h5">Sun</h3>
+                          <p><i class="mi mi-fw mi-2x mi-rain-heavy"></i><br>15°/22°</p>
+                        </li>
+                        <li class="col-xs-4 col-sm-2 text-center">
+                          <h3 class="h5">Mon</h3>
+                          <p><i class="mi mi-fw mi-2x mi-clouds"></i><br>12°/17°</p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </div>
+  </div>
+</section>
+
+<app-emergency-services id="emergencyServices"></app-emergency-services>
+
+<app-local-news id="news"></app-local-news>
+
+<div class="login-form-container">
+  <div id="close-login-btn" class="fas fa-times"></div>
+  <form action="">
+      <h3>Sign In</h3>
+      <span>Username</span>
+      <input type="email" name="username" id="username" class="box" placeholder="Enter your email">
+      <span>Password</span>
+      <input type="password" name="password" id="password" class="box" placeholder="Enter your password">
+      <div class="checkbox">
+          <input type="checkbox" name="remember" id="remember-me">
+          <label for="remember-me">Remember me</label>
+      </div>
+      <input type="submit" value="Sign In" class="btn">
+      <p>Forgot password? <a href="#">Click here</a></p>
+      <p>Don't have an account? <a href="#">Sign up</a></p>
+  </form>
+</div>
